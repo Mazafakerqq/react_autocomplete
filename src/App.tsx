@@ -13,11 +13,13 @@ export const App: React.FC = () => {
   const filteredQuery = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-shadow
     debounce((query: string) => {
-      if (query === '') {
+      const trimmedQuery = query.trim();
+
+      if (trimmedQuery === '') {
         setAppliedQuery(peopleFromServer);
       } else {
         const filtered = peopleFromServer.filter(person =>
-          person.name.toLowerCase().includes(query.toLowerCase()),
+          person.name.toLowerCase().includes(trimmedQuery.toLowerCase()),
         );
 
         setAppliedQuery(filtered);
